@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console Log Forwarder - Test Page</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+        }
+        
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        
+        .test-section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        
+        button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        
+        button:hover {
+            background: #45a049;
+        }
+        
+        button.secondary {
+            background: #2196F3;
+        }
+        
+        button.secondary:hover {
+            background: #1976D2;
+        }
+        
+        button.warning {
+            background: #ff9800;
+        }
+        
+        button.warning:hover {
+            background: #f57c00;
+        }
+        
+        button.danger {
+            background: #f44336;
+        }
+        
+        button.danger:hover {
+            background: #d32f2f;
+        }
+        
+        .log-output {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 15px 0;
+        }
+        
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            border-left: 3px solid #3498db;
+            background: rgba(52, 152, 219, 0.1);
+        }
+        
+        .log-entry.error {
+            border-left-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+        }
+        
+        .log-entry.warn {
+            border-left-color: #f39c12;
+            background: rgba(243, 156, 18, 0.1);
+        }
+        
+        .log-entry.info {
+            border-left-color: #3498db;
+            background: rgba(52, 152, 219, 0.1);
+        }
+        
+        .status {
+            padding: 10px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        
+        .status.success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            color: #4CAF50;
+        }
+        
+        .status.info {
+            background: rgba(33, 150, 243, 0.2);
+            border: 1px solid rgba(33, 150, 243, 0.3);
+            color: #2196F3;
+        }
+        
+        .instructions {
+            background: #e8f5e8;
+            border: 1px solid #c8e6c9;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .instructions h4 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+        
+        .instructions ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 Console Log Forwarder - Test Page</h1>
+        <p>Use this page to test your Chrome extension's console log capturing capabilities</p>
+    </div>
+
+    <div class="instructions">
+        <h4>📋 How to Test:</h4>
+        <ol>
+            <li>Install the Console Log Forwarder Chrome extension</li>
+            <li>Configure it with this page's URL and your backend server URL</li>
+            <li>Start logging in the extension popup</li>
+            <li>Use the buttons below to generate different types of console logs</li>
+            <li>Check your backend server for received logs</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h3>🔍 Basic Console Methods</h3>
+        <p>Test basic console logging methods that should be captured by the extension.</p>
+        
+        <div class="button-group">
+            <button onclick="testBasicLogs()">Test Basic Logs</button>
+            <button onclick="testObjectLogs()">Test Object Logs</button>
+            <button onclick="testArrayLogs()">Test Array Logs</button>
+            <button onclick="testTableLog()">Test Table Log</button>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>⏱️ Timing Methods</h3>
+        <p>Test console timing methods that track execution time.</p>
+        
+        <div class="button-group">
+            <button onclick="testTiming()">Test Timing</button>
+            <button onclick="testCount()">Test Count</button>
+            <button onclick="testGrouping()">Test Grouping</button>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>⚠️ Error and Warning Methods</h3>
+        <p>Test error and warning console methods.</p>
+        
+        <div class="button-group">
+            <button class="warning" onclick="testWarnings()">Test Warnings</button>
+            <button class="danger" onclick="testErrors()">Test Errors</button>
+            <button class="danger" onclick="testAssert()">Test Assert</button>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>🎯 Advanced Features</h3>
+        <p>Test advanced console features and error handling.</p>
+        
+        <div class="button-group">
+            <button class="secondary" onclick="testTrace()">Test Trace</button>
+            <button class="secondary" onclick="testDir()">Test Dir</button>
+            <button class="secondary" onclick="testClear()">Test Clear</button>
+            <button class="danger" onclick="throwError()">Throw Error</button>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>📊 Live Log Output</h3>
+        <p>Real-time display of console logs (for debugging purposes).</p>
+        
+        <div id="logOutput" class="log-output">
+            <div class="log-entry info">Console Log Forwarder Test Page Loaded</div>
+            <div class="log-entry info">Ready to test console methods...</div>
+        </div>
+        
+        <button onclick="clearLogOutput()">Clear Output</button>
+    </div>
+
+    <div class="test-section">
+        <h3>🔧 Extension Status</h3>
+        <div id="extensionStatus" class="status info">
+            Checking extension status...
+        </div>
+        <button onclick="checkExtensionStatus()">Check Status</button>
+    </div>
+
+    <script>
+        // Store original console methods
+        const originalConsole = {
+            log: console.log,
+            error: console.error,
+            warn: console.warn,
+            info: console.info,
+            debug: console.debug,
+            trace: console.trace,
+            group: console.group,
+            groupEnd: console.groupEnd,
+            time: console.time,
+            timeEnd: console.timeEnd,
+            count: console.count,
+            clear: console.clear,
+            dir: console.dir,
+            table: console.table,
+            assert: console.assert
+        };
+
+        // Override console methods to also display in our log output
+        function overrideConsole() {
+            console.log = function(...args) {
+                originalConsole.log.apply(console, args);
+                addLogEntry('log', args);
+            };
+            
+            console.error = function(...args) {
+                originalConsole.error.apply(console, args);
+                addLogEntry('error', args);
+            };
+            
+            console.warn = function(...args) {
+                originalConsole.warn.apply(console, args);
+                addLogEntry('warn', args);
+            };
+            
+            console.info = function(...args) {
+                originalConsole.info.apply(console, args);
+                addLogEntry('info', args);
+            };
+            
+            console.debug = function(...args) {
+                originalConsole.debug.apply(console, args);
+                addLogEntry('debug', args);
+            };
+        }
+
+        // Add log entry to the output display
+        function addLogEntry(level, args) {
+            const logOutput = document.getElementById('logOutput');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${level}`;
+            
+            const message = args.map(arg => {
+                if (typeof arg === 'object') {
+                    try {
+                        return JSON.stringify(arg);
+                    } catch {
+                        return arg.toString();
+                    }
+                }
+                return String(arg);
+            }).join(' ');
+            
+            entry.textContent = `[${level.toUpperCase()}] ${message}`;
+            logOutput.appendChild(entry);
+            logOutput.scrollTop = logOutput.scrollHeight;
+        }
+
+        // Test functions
+        function testBasicLogs() {
+            console.log('This is a basic log message');
+            console.info('This is an info message');
+            console.debug('This is a debug message');
+        }
+
+        function testObjectLogs() {
+            const user = {
+                name: 'John Doe',
+                age: 30,
+                email: 'john@example.com',
+                preferences: {
+                    theme: 'dark',
+                    notifications: true
+                }
+            };
+            
+            console.log('User object:', user);
+            console.dir(user);
+        }
+
+        function testArrayLogs() {
+            const fruits = ['apple', 'banana', 'orange', 'grape'];
+            console.log('Fruits array:', fruits);
+            console.table(fruits);
+        }
+
+        function testTableLog() {
+            const users = [
+                { name: 'Alice', age: 25, role: 'Developer' },
+                { name: 'Bob', age: 30, role: 'Designer' },
+                { name: 'Charlie', age: 35, role: 'Manager' }
+            ];
+            
+            console.table(users);
+        }
+
+        function testTiming() {
+            console.time('test-operation');
+            setTimeout(() => {
+                console.timeEnd('test-operation');
+            }, 1000);
+        }
+
+        function testCount() {
+            console.count('button-click');
+            console.count('button-click');
+            console.count('button-click');
+            console.countReset('button-click');
+            console.count('button-click');
+        }
+
+        function testGrouping() {
+            console.group('User Actions');
+            console.log('User clicked button');
+            console.log('Form submitted');
+            console.group('API Calls');
+            console.log('POST /api/users');
+            console.log('Response: 200 OK');
+            console.groupEnd();
+            console.groupEnd();
+        }
+
+        function testWarnings() {
+            console.warn('This is a warning message');
+            console.warn('Deprecated feature used');
+        }
+
+        function testErrors() {
+            console.error('This is an error message');
+            console.error('API request failed', { status: 500, message: 'Internal Server Error' });
+        }
+
+        function testAssert() {
+            console.assert(2 + 2 === 5, 'Math is broken!');
+            console.assert(document.body, 'Document body exists');
+        }
+
+        function testTrace() {
+            console.trace('This is a trace message');
+        }
+
+        function testDir() {
+            console.dir(document.body);
+        }
+
+        function testClear() {
+            console.clear();
+            addLogEntry('info', ['Console cleared']);
+        }
+
+        function throwError() {
+            throw new Error('This is a test error for the extension to catch');
+        }
+
+        function clearLogOutput() {
+            const logOutput = document.getElementById('logOutput');
+            logOutput.innerHTML = '<div class="log-entry info">Log output cleared</div>';
+        }
+
+        function checkExtensionStatus() {
+            const statusDiv = document.getElementById('extensionStatus');
+            
+            if (typeof chrome !== 'undefined' && chrome.runtime) {
+                statusDiv.className = 'status success';
+                statusDiv.textContent = 'Chrome extension APIs available';
+            } else {
+                statusDiv.className = 'status info';
+                statusDiv.textContent = 'Chrome extension APIs not available (normal for regular web pages)';
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            overrideConsole();
+            checkExtensionStatus();
+            
+            // Log page load
+            console.info('Console Log Forwarder Test Page loaded successfully');
+            console.log('Page URL:', window.location.href);
+            console.log('User Agent:', navigator.userAgent);
+        });
+
+        // Test error handling
+        window.addEventListener('error', function(event) {
+            console.error('Uncaught error:', event.error);
+        });
+
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('Unhandled promise rejection:', event.reason);
+        });
+    </script>
+</body>
+</html> 

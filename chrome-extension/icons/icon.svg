@@ -1,0 +1,27 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="#667eea" stroke="#764ba2" stroke-width="4"/>
+  
+  <!-- Console/terminal icon -->
+  <rect x="32" y="40" width="64" height="48" rx="4" fill="white" opacity="0.9"/>
+  
+  <!-- Terminal window header -->
+  <rect x="32" y="40" width="64" height="8" rx="4" fill="#e74c3c"/>
+  <circle cx="38" cy="44" r="2" fill="white"/>
+  <circle cx="44" cy="44" r="2" fill="white"/>
+  <circle cx="50" cy="44" r="2" fill="white"/>
+  
+  <!-- Console text lines -->
+  <rect x="36" y="56" width="24" height="2" fill="#2c3e50"/>
+  <rect x="36" y="62" width="32" height="2" fill="#2c3e50"/>
+  <rect x="36" y="68" width="28" height="2" fill="#2c3e50"/>
+  <rect x="36" y="74" width="20" height="2" fill="#2c3e50"/>
+  
+  <!-- Log forwarding arrow -->
+  <path d="M 80 64 L 100 64 M 100 64 L 95 59 M 100 64 L 95 69" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Data flow dots -->
+  <circle cx="88" cy="64" r="2" fill="white" opacity="0.7"/>
+  <circle cx="92" cy="64" r="2" fill="white" opacity="0.5"/>
+  <circle cx="96" cy="64" r="2" fill="white" opacity="0.3"/>
+</svg> 

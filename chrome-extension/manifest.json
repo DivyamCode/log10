@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Console Log Forwarder",
+  "description": "Captures console logs from web pages and forwards them to a backend server",
+  "version": "1.0.0",
+  "permissions": [
+    "tabs",           // Required to access tab information and inject scripts
+    "scripting",      // Required to inject content scripts into web pages
+    "storage"         // Required to store configuration data locally
+  ],
+  "host_permissions": [
+    "<all_urls>"      // Allows the extension to work on any website
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Console Log Forwarder",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+} 

@@ -1,0 +1,49 @@
+{
+  "name": "console-log-forwarder",
+  "version": "1.0.0",
+  "description": "A Chrome extension that captures console logs from web pages and forwards them to a backend server",
+  "main": "background.js",
+  "scripts": {
+    "build": "echo 'Chrome extensions are loaded directly - no build step required'",
+    "generate-icons": "node generate-icons.js",
+    "test": "echo 'Open test-page.html in a browser to test the extension'",
+    "lint": "echo 'No linting configured for Chrome extension'",
+    "package": "zip -r console-log-forwarder.zip . -x '*.git*' 'node_modules/*' '*.zip'"
+  },
+  "keywords": [
+    "chrome-extension",
+    "console-logging",
+    "log-forwarding",
+    "debugging",
+    "monitoring",
+    "web-development"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/console-log-forwarder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/console-log-forwarder/issues"
+  },
+  "homepage": "https://github.com/yourusername/console-log-forwarder#readme",
+  "engines": {
+    "chrome": ">=88.0.0"
+  },
+  "manifest": {
+    "version": 3,
+    "permissions": [
+      "tabs",
+      "scripting",
+      "storage"
+    ],
+    "host_permissions": [
+      "<all_urls>"
+    ]
+  },
+  "devDependencies": {
+    "canvas": "^2.11.2"
+  },
+  "dependencies": {}
+} 
